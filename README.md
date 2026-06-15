@@ -55,6 +55,7 @@ The demo workflow:
 
 - [Underwriting Methodology](docs/UNDERWRITING_METHODOLOGY.md)
 - [Portfolio Monitoring Runbook](docs/MONITORING_RUNBOOK.md)
+- [Watchlist Monitoring](docs/WATCHLIST_MONITORING.md)
 - [Data Dictionary](docs/DATA_DICTIONARY.md)
 - [Data Quality Controls](docs/DATA_QUALITY_CONTROLS.md)
 - [Control Framework](docs/CONTROL_FRAMEWORK.md)

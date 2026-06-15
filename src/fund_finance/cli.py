@@ -26,6 +26,7 @@ from fund_finance.analytics.risk_scoring import (
     save_credit_recommendation,
 )
 from fund_finance.analytics.stress_testing import FacilityStressInput, run_nav_ltv_stress
+from fund_finance.analytics.watchlist import WatchlistInput, classify_watchlist_status
 from fund_finance.controls.data_quality import validate_raw_data
 from fund_finance.db.connection import get_engine, list_tables, test_connection
 from fund_finance.db.load import count_loaded_rows, load_all_raw_data
@@ -642,6 +643,96 @@ def run_facility_stress(
         )
     else:
         console.print("[green]No stress breaches detected.[/green]")
+
+
+@app.command("generate-watchlist")
+def generate_watchlist() -> None:
+    """Generate a portfolio monitoring watchlist."""
+    engine = get_engine()
+
+    query = text(
+        """
+        WITH latest_recommendations AS (
+            SELECT DISTINCT ON (facility_id)
+                facility_id,
+                risk_score,
+                credit_rating,
+                recommendation
+            FROM credit_recommendations
+            ORDER BY facility_id, analysis_date DESC
+        )
+        SELECT
+            ft.facility_id,
+            f.fund_name,
+            ft.facility_type,
+            lr.risk_score,
+            lr.credit_rating,
+            lr.recommendation,
+            COUNT(me.event_id) FILTER (
+                WHERE COALESCE(me.resolved_flag, false) = false
+            ) AS open_monitoring_events,
+            COUNT(me.event_id) FILTER (
+                WHERE COALESCE(me.escalation_required_flag, false) = true
+                AND COALESCE(me.resolved_flag, false) = false
+            ) AS escalation_events
+        FROM facility_terms ft
+        JOIN funds f
+            ON ft.fund_id = f.fund_id
+        LEFT JOIN latest_recommendations lr
+            ON ft.facility_id = lr.facility_id
+        LEFT JOIN monitoring_events me
+            ON ft.facility_id = me.facility_id
+        GROUP BY
+            ft.facility_id,
+            f.fund_name,
+            ft.facility_type,
+            lr.risk_score,
+            lr.credit_rating,
+            lr.recommendation
+        ORDER BY ft.facility_id;
+        """
+    )
+
+    with engine.connect() as connection:
+        rows = connection.execute(query).mappings().all()
+
+    table = Table(title="Portfolio Monitoring Watchlist")
+    table.add_column("Facility", style="cyan")
+    table.add_column("Fund")
+    table.add_column("Type")
+    table.add_column("Score", justify="right")
+    table.add_column("Rating")
+    table.add_column("Recommendation")
+    table.add_column("Open Events", justify="right")
+    table.add_column("Escalations", justify="right")
+    table.add_column("Watchlist Status")
+    table.add_column("Rationale")
+
+    for row in rows:
+        watchlist_result = classify_watchlist_status(
+            WatchlistInput(
+                facility_id=row["facility_id"],
+                credit_rating=row["credit_rating"],
+                recommendation=row["recommendation"],
+                open_monitoring_events=int(row["open_monitoring_events"]),
+                escalation_events=int(row["escalation_events"]),
+            )
+        )
+
+        table.add_row(
+            row["facility_id"],
+            row["fund_name"],
+            row["facility_type"],
+            "" if row["risk_score"] is None else f'{float(row["risk_score"]):.1f}',
+            row["credit_rating"] or "Not scored",
+            row["recommendation"] or "Not scored",
+            str(row["open_monitoring_events"]),
+            str(row["escalation_events"]),
+            watchlist_result.watchlist_status,
+            watchlist_result.rationale,
+        )
+
+    console.print(table)
 
 
 if __name__ == "__main__":
