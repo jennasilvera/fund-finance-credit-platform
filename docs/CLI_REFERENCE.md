@@ -236,3 +236,29 @@ make demo
 ```
 
 This confirms the project can run through quality checks and the full credit workflow.
+
+---
+
+## 11. Audit Logging Commands
+
+### Log an Audit Run
+
+```bash
+fund-finance log-audit-run \
+  --process-name demo_workflow \
+  --status success \
+  --records-processed 0 \
+  --records-failed 0
+```
+
+Persists a process execution record to the `audit_runs` table.
+
+---
+
+### Show Recent Audit Runs
+
+```bash
+fund-finance show-audit-runs
+```
+
+Displays recent audit run records from PostgreSQL.

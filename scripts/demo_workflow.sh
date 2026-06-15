@@ -64,5 +64,17 @@ echo "12. Generating credit memo for breached hybrid facility FAC002..."
 fund-finance generate-credit-memo --facility-id FAC002
 
 echo
+echo "Logging successful demo workflow audit run..."
+fund-finance log-audit-run \
+  --process-name demo_workflow \
+  --status success \
+  --records-processed 0 \
+  --records-failed 0
+
+echo
+echo "Recent audit runs:"
+fund-finance show-audit-runs
+
+echo
 echo "Demo workflow complete."
 echo "Generated credit memos can be found in data/outputs/credit_memos/"
