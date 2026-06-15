@@ -68,6 +68,7 @@ The demo workflow:
 - [Reviewer Guide](docs/REVIEWER_GUIDE.md)
 - [System Architecture](docs/ARCHITECTURE.md)
 - [Operations Runbook](docs/OPERATIONS_RUNBOOK.md)
+- [CLI Reference](docs/CLI_REFERENCE.md)
 
 ---
 
