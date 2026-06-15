@@ -33,7 +33,19 @@ fund-finance run-nav-borrowing-base --facility-id FAC003
 
 echo
 echo "8. Running covenant monitoring for all facilities..."
+set +e
 fund-finance run-covenant-monitoring --facility-id ALL
+covenant_exit_code=$?
+set -e
+
+if [ "$covenant_exit_code" -eq 2 ]; then
+    echo
+    echo "Expected covenant breach detected during demo; continuing workflow."
+elif [ "$covenant_exit_code" -ne 0 ]; then
+    echo
+    echo "Unexpected covenant monitoring failure."
+    exit "$covenant_exit_code"
+fi
 
 echo
 echo "9. Running credit scoring for all facilities..."
