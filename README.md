@@ -43,6 +43,7 @@ The demo workflow:
 - [Analyst User Guide](docs/ANALYST_USER_GUIDE.md)
 - [Credit Officer User Guide](docs/CREDIT_OFFICER_USER_GUIDE.md)
 - [Reporting Packages](docs/REPORTING_PACKAGES.md)
+- [Demo Walkthrough](docs/DEMO_WALKTHROUGH.md)
 
 ---
 
