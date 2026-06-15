@@ -32,6 +32,7 @@ from fund_finance.controls.data_quality import validate_raw_data
 from fund_finance.db.connection import get_engine, list_tables, test_connection
 from fund_finance.db.load import count_loaded_rows, load_all_raw_data
 from fund_finance.reporting.credit_memo import generate_credit_approval_memo
+from fund_finance.reporting.report_index import list_credit_memos
 
 app = typer.Typer(
     help="Fund Finance Credit Underwriting & Portfolio Monitoring Platform"
@@ -784,6 +785,32 @@ def show_audit_runs(
             str(row["records_failed"]),
             str(row["status"]),
             "" if row["error_message"] is None else str(row["error_message"]),
+        )
+
+    console.print(table)
+
+
+@app.command("list-credit-memos")
+def list_credit_memo_outputs() -> None:
+    """List generated credit memo PDF outputs."""
+    memos = list_credit_memos()
+
+    if not memos:
+        console.print("[yellow]No generated credit memo PDFs found.[/yellow]")
+        return
+
+    table = Table(title="Generated Credit Memo PDFs")
+    table.add_column("Filename", style="cyan")
+    table.add_column("Path")
+    table.add_column("Size", justify="right")
+    table.add_column("Modified At")
+
+    for memo in memos:
+        table.add_row(
+            memo.filename,
+            memo.path,
+            f"{memo.size_bytes:,} bytes",
+            memo.modified_at.isoformat(timespec="seconds"),
         )
 
     console.print(table)
