@@ -32,6 +32,7 @@ from fund_finance.controls.data_quality import validate_raw_data
 from fund_finance.db.connection import get_engine, list_tables, test_connection
 from fund_finance.db.load import count_loaded_rows, load_all_raw_data
 from fund_finance.reporting.credit_memo import generate_credit_approval_memo
+from fund_finance.reporting.portfolio_summary import export_portfolio_summary
 from fund_finance.reporting.report_index import list_credit_memos
 
 app = typer.Typer(
@@ -814,6 +815,17 @@ def list_credit_memo_outputs() -> None:
         )
 
     console.print(table)
+
+
+@app.command("export-portfolio-summary")
+def export_portfolio_summary_command() -> None:
+    """Export a portfolio monitoring summary CSV."""
+    export = export_portfolio_summary(get_engine())
+
+    console.print(
+        "[green]Portfolio summary exported:[/green] "
+        f"{export.output_path} ({export.row_count} rows)"
+    )
 
 
 if __name__ == "__main__":

@@ -76,6 +76,10 @@ echo "Recent audit runs:"
 fund-finance show-audit-runs
 
 echo
+echo "Exporting portfolio monitoring summary CSV..."
+fund-finance export-portfolio-summary
+
+echo
 echo "Generated credit memo inventory:"
 fund-finance list-credit-memos
 
