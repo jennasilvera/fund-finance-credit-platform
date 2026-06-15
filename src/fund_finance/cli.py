@@ -24,6 +24,7 @@ from fund_finance.analytics.risk_scoring import (
     run_credit_scoring,
     save_credit_recommendation,
 )
+from fund_finance.controls.data_quality import validate_raw_data
 from fund_finance.db.connection import list_tables, test_connection
 from fund_finance.db.load import count_loaded_rows, load_all_raw_data
 from fund_finance.reporting.credit_memo import generate_credit_approval_memo
@@ -470,6 +471,34 @@ def generate_credit_memo_command(
         raise typer.Exit(code=1) from exc
 
     console.print(f"[green]Generated credit approval memo:[/green] {output_path}")
+
+
+@app.command("validate-data")
+def validate_data() -> None:
+    """Run raw data quality checks before loading or analysis."""
+    issues = validate_raw_data()
+
+    if not issues:
+        console.print("[green]Raw data quality validation passed.[/green]")
+        return
+
+    table = Table(title="Raw Data Quality Issues")
+    table.add_column("Table", style="cyan")
+    table.add_column("Check")
+    table.add_column("Severity")
+    table.add_column("Message")
+
+    for issue in issues:
+        table.add_row(
+            issue.table_name,
+            issue.check_name,
+            issue.severity,
+            issue.message,
+        )
+
+    console.print(table)
+    console.print(f"[red]Data quality validation failed:[/red] {len(issues)} issues found.")
+    raise typer.Exit(code=1)
 
 
 if __name__ == "__main__":
