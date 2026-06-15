@@ -11,6 +11,13 @@ This project models how a bank fund finance team might support underwriting, cre
 
 ---
 
+## Documentation
+
+- [Underwriting Methodology](docs/UNDERWRITING_METHODOLOGY.md)
+- [Portfolio Monitoring Runbook](docs/MONITORING_RUNBOOK.md)
+
+---
+
 ## Project Objective
 
 The goal of this project is to demonstrate practical credit, finance, data, and engineering skills relevant to:
