@@ -27,6 +27,7 @@ from fund_finance.analytics.risk_scoring import (
 )
 from fund_finance.analytics.stress_testing import FacilityStressInput, run_nav_ltv_stress
 from fund_finance.analytics.watchlist import WatchlistInput, classify_watchlist_status
+from fund_finance.controls import audit as audit_controls
 from fund_finance.controls.data_quality import validate_raw_data
 from fund_finance.db.connection import get_engine, list_tables, test_connection
 from fund_finance.db.load import count_loaded_rows, load_all_raw_data
@@ -730,6 +731,59 @@ def generate_watchlist() -> None:
             str(row["escalation_events"]),
             watchlist_result.watchlist_status,
             watchlist_result.rationale,
+        )
+
+    console.print(table)
+
+
+@app.command("log-audit-run")
+def log_audit_run(
+    process_name: str = typer.Option(..., help="Process name to log."),
+    status: str = typer.Option(..., help="success, failed, or partial_success."),
+    records_processed: int = typer.Option(0, help="Number of records processed."),
+    records_failed: int = typer.Option(0, help="Number of records failed."),
+    input_file_hash: str | None = typer.Option(None, help="Optional input file hash."),
+    error_message: str | None = typer.Option(None, help="Optional error message."),
+) -> None:
+    """Persist an audit run record."""
+    audit_run = audit_controls.create_audit_run(
+        process_name=process_name,
+        status=status,
+        records_processed=records_processed,
+        records_failed=records_failed,
+        input_file_hash=input_file_hash,
+        error_message=error_message,
+    )
+
+    run_id = audit_controls.persist_audit_run(get_engine(), audit_run)
+    console.print(f"[green]Audit run logged:[/green] {run_id}")
+
+
+@app.command("show-audit-runs")
+def show_audit_runs(
+    limit: int = typer.Option(10, help="Number of recent audit runs to show."),
+) -> None:
+    """Show recent audit run records."""
+    rows = audit_controls.fetch_recent_audit_runs(get_engine(), limit=limit)
+
+    table = Table(title="Recent Audit Runs")
+    table.add_column("Run ID", style="cyan")
+    table.add_column("Timestamp")
+    table.add_column("Process")
+    table.add_column("Processed", justify="right")
+    table.add_column("Failed", justify="right")
+    table.add_column("Status")
+    table.add_column("Error")
+
+    for row in rows:
+        table.add_row(
+            str(row["run_id"]),
+            str(row["run_timestamp"]),
+            str(row["process_name"]),
+            str(row["records_processed"]),
+            str(row["records_failed"]),
+            str(row["status"]),
+            "" if row["error_message"] is None else str(row["error_message"]),
         )
 
     console.print(table)
