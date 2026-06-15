@@ -63,6 +63,7 @@ The demo workflow:
 - [Reporting Packages](docs/REPORTING_PACKAGES.md)
 - [Demo Walkthrough](docs/DEMO_WALKTHROUGH.md)
 - [Sample Output Guide](docs/SAMPLE_OUTPUT_GUIDE.md)
+- [Reviewer Guide](docs/REVIEWER_GUIDE.md)
 - [System Architecture](docs/ARCHITECTURE.md)
 - [Operations Runbook](docs/OPERATIONS_RUNBOOK.md)
 
