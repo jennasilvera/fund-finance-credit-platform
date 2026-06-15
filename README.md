@@ -16,6 +16,7 @@ This project models how a bank fund finance team might support underwriting, cre
 - [Underwriting Methodology](docs/UNDERWRITING_METHODOLOGY.md)
 - [Portfolio Monitoring Runbook](docs/MONITORING_RUNBOOK.md)
 - [Data Dictionary](docs/DATA_DICTIONARY.md)
+- [Data Quality Controls](docs/DATA_QUALITY_CONTROLS.md)
 - [Analyst User Guide](docs/ANALYST_USER_GUIDE.md)
 - [Credit Officer User Guide](docs/CREDIT_OFFICER_USER_GUIDE.md)
 - [Reporting Packages](docs/REPORTING_PACKAGES.md)
