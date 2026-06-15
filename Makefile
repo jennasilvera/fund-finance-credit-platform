@@ -27,3 +27,7 @@ status:
 .PHONY: demo
 demo:
 	./scripts/demo_workflow.sh
+
+.PHONY: preflight
+preflight:
+	./scripts/preflight_check.sh

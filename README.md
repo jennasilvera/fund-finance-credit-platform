@@ -11,6 +11,24 @@ This project models how a bank fund finance team might support underwriting, cre
 
 ---
 
+## Preflight Checks
+
+Before pushing changes or demoing the project, run:
+
+```bash
+make preflight
+```
+
+The preflight workflow checks:
+
+- Ruff linting
+- pytest test suite
+- demo workflow shell syntax
+- PostgreSQL connectivity
+- simulated data generation
+- raw data quality validation
+
+---
 ## One-Command Demo
 
 After starting PostgreSQL, run the full demonstration workflow:
