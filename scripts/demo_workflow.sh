@@ -52,11 +52,15 @@ echo "9. Running credit scoring for all facilities..."
 fund-finance run-credit-scoring --facility-id ALL
 
 echo
-echo "10. Running data-driven NAV/LTV stress test for breached hybrid facility FAC002..."
+echo "10. Generating portfolio monitoring watchlist..."
+fund-finance generate-watchlist
+
+echo
+echo "11. Running data-driven NAV/LTV stress test for breached hybrid facility FAC002..."
 fund-finance run-facility-stress --facility-id FAC002
 
 echo
-echo "11. Generating credit memo for breached hybrid facility FAC002..."
+echo "12. Generating credit memo for breached hybrid facility FAC002..."
 fund-finance generate-credit-memo --facility-id FAC002
 
 echo
