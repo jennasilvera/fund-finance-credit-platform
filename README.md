@@ -11,6 +11,25 @@ This project models how a bank fund finance team might support underwriting, cre
 
 ---
 
+## Key Capabilities
+
+- Simulates subscription line, NAV, and hybrid fund finance facilities
+- Generates synthetic fund, investor, commitment, NAV, portfolio, facility, and covenant data
+- Validates raw data quality before loading or analysis
+- Loads structured data into PostgreSQL
+- Calculates subscription borrowing base availability
+- Calculates NAV and hybrid collateral support
+- Detects covenant breaches and monitoring events
+- Produces credit scores, ratings, recommendations, strengths, risks, and mitigants
+- Classifies portfolio watchlist status
+- Runs NAV / LTV downside stress testing
+- Generates credit approval memo PDFs
+- Exports portfolio monitoring summary CSVs
+- Logs audit runs for workflow traceability
+- Includes automated tests, linting, CI, demo scripts, and institutional documentation
+
+---
+
 ## Preflight Checks
 
 Before pushing changes or demoing the project, run:
