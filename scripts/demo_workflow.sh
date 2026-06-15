@@ -52,12 +52,8 @@ echo "9. Running credit scoring for all facilities..."
 fund-finance run-credit-scoring --facility-id ALL
 
 echo
-echo "10. Running NAV/LTV stress test for breached hybrid facility FAC002..."
-fund-finance run-nav-stress \
-  --facility-id FAC002 \
-  --eligible-nav-usd 640000000 \
-  --outstanding-amount-usd 180000000 \
-  --max-ltv-pct 30
+echo "10. Running data-driven NAV/LTV stress test for breached hybrid facility FAC002..."
+fund-finance run-facility-stress --facility-id FAC002
 
 echo
 echo "11. Generating credit memo for breached hybrid facility FAC002..."
