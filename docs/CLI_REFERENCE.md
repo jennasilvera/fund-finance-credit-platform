@@ -262,3 +262,15 @@ fund-finance show-audit-runs
 ```
 
 Displays recent audit run records from PostgreSQL.
+
+---
+
+## 12. Credit Memo Inventory Command
+
+### List Generated Credit Memos
+
+```bash
+fund-finance list-credit-memos
+```
+
+Displays generated credit memo PDF outputs, including filename, path, file size, and modified timestamp.

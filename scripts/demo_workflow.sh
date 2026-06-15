@@ -76,5 +76,9 @@ echo "Recent audit runs:"
 fund-finance show-audit-runs
 
 echo
+echo "Generated credit memo inventory:"
+fund-finance list-credit-memos
+
+echo
 echo "Demo workflow complete."
 echo "Generated credit memos can be found in data/outputs/credit_memos/"
