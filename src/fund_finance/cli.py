@@ -24,6 +24,7 @@ from fund_finance.analytics.risk_scoring import (
     run_credit_scoring,
     save_credit_recommendation,
 )
+from fund_finance.analytics.stress_testing import FacilityStressInput, run_nav_ltv_stress
 from fund_finance.controls.data_quality import validate_raw_data
 from fund_finance.db.connection import list_tables, test_connection
 from fund_finance.db.load import count_loaded_rows, load_all_raw_data
@@ -499,6 +500,59 @@ def validate_data() -> None:
     console.print(table)
     console.print(f"[red]Data quality validation failed:[/red] {len(issues)} issues found.")
     raise typer.Exit(code=1)
+
+
+@app.command("run-nav-stress")
+def run_nav_stress(
+    facility_id: str = typer.Option(..., help="Facility identifier."),
+    eligible_nav_usd: float = typer.Option(..., help="Eligible NAV in USD."),
+    outstanding_amount_usd: float = typer.Option(
+        ...,
+        help="Outstanding facility amount in USD.",
+    ),
+    max_ltv_pct: float = typer.Option(..., help="Maximum permitted LTV percentage."),
+) -> None:
+    """Run NAV/LTV downside stress testing for a facility."""
+    facility = FacilityStressInput(
+        facility_id=facility_id,
+        facility_type="nav_or_hybrid",
+        eligible_nav_usd=eligible_nav_usd,
+        outstanding_amount_usd=outstanding_amount_usd,
+        max_ltv_pct=max_ltv_pct,
+    )
+
+    results = run_nav_ltv_stress(facility)
+
+    table = Table(title=f"NAV / LTV Stress Test: {facility_id}")
+    table.add_column("Scenario", style="cyan")
+    table.add_column("NAV Shock")
+    table.add_column("Stressed Eligible NAV", justify="right")
+    table.add_column("Outstanding", justify="right")
+    table.add_column("Stressed LTV", justify="right")
+    table.add_column("Max LTV", justify="right")
+    table.add_column("Headroom", justify="right")
+    table.add_column("Breach", justify="center")
+
+    for result in results:
+        table.add_row(
+            result.scenario_name,
+            f"{result.nav_shock_pct:.0%}",
+            f"${result.stressed_eligible_nav_usd:,.0f}",
+            f"${result.outstanding_amount_usd:,.0f}",
+            f"{result.stressed_ltv_pct:.2f}%",
+            f"{result.max_ltv_pct:.2f}%",
+            f"{result.ltv_headroom_pct:.2f}%",
+            "YES" if result.breach_flag else "NO",
+        )
+
+    console.print(table)
+
+    if any(result.breach_flag for result in results):
+        console.print(
+            "[yellow]Stress breach detected under downside NAV scenario.[/yellow]"
+        )
+    else:
+        console.print("[green]No stress breaches detected.[/green]")
 
 
 if __name__ == "__main__":
