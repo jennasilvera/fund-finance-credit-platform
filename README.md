@@ -68,6 +68,7 @@ The demo workflow:
 - [Sample Output Guide](docs/SAMPLE_OUTPUT_GUIDE.md)
 - [Portfolio Summary Export](docs/PORTFOLIO_SUMMARY_EXPORT.md)
 - [Reviewer Guide](docs/REVIEWER_GUIDE.md)
+- [Project Roadmap](docs/ROADMAP.md)
 - [System Architecture](docs/ARCHITECTURE.md)
 - [Operations Runbook](docs/OPERATIONS_RUNBOOK.md)
 - [CLI Reference](docs/CLI_REFERENCE.md)
