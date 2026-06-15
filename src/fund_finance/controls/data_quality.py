@@ -329,6 +329,61 @@ def _check_facility_amounts(raw_data_dir: Path) -> list[DataQualityIssue]:
     return issues
 
 
+def _check_referential_integrity(raw_data_dir: Path) -> list[DataQualityIssue]:
+    issues = []
+
+    datasets: dict[str, pd.DataFrame] = {}
+
+    for table_name in REQUIRED_FILES:
+        dataframe = _read_csv(raw_data_dir, table_name)
+        if dataframe is not None:
+            datasets[table_name] = dataframe
+
+    relationships = [
+        ("funds", "manager_id", "fund_managers", "manager_id"),
+        ("capital_commitments", "fund_id", "funds", "fund_id"),
+        ("capital_commitments", "investor_id", "investors", "investor_id"),
+        ("capital_calls", "fund_id", "funds", "fund_id"),
+        ("capital_calls", "investor_id", "investors", "investor_id"),
+        ("nav_history", "fund_id", "funds", "fund_id"),
+        ("portfolio_companies", "fund_id", "funds", "fund_id"),
+        ("facility_terms", "fund_id", "funds", "fund_id"),
+        ("covenant_terms", "facility_id", "facility_terms", "facility_id"),
+        ("monitoring_events", "fund_id", "funds", "fund_id"),
+        ("monitoring_events", "facility_id", "facility_terms", "facility_id"),
+    ]
+
+    for child_table, child_key, parent_table, parent_key in relationships:
+        if child_table not in datasets or parent_table not in datasets:
+            continue
+
+        child_dataframe = datasets[child_table]
+        parent_dataframe = datasets[parent_table]
+
+        if child_key not in child_dataframe.columns or parent_key not in parent_dataframe.columns:
+            continue
+
+        child_values = set(child_dataframe[child_key].dropna().astype(str))
+        parent_values = set(parent_dataframe[parent_key].dropna().astype(str))
+
+        orphan_values = sorted(child_values - parent_values)
+
+        if orphan_values:
+            sample_values = ", ".join(orphan_values[:5])
+            issues.append(
+                _issue(
+                    table_name=child_table,
+                    check_name="referential_integrity",
+                    message=(
+                        f"{child_key} contains values not found in "
+                        f"{parent_table}.{parent_key}: {sample_values}"
+                    ),
+                )
+            )
+
+    return issues
+
+
 def validate_raw_data(raw_data_dir: Path = RAW_DATA_DIR) -> list[DataQualityIssue]:
     issues = []
     issues.extend(_check_required_files_and_columns(raw_data_dir))
@@ -337,4 +392,5 @@ def validate_raw_data(raw_data_dir: Path = RAW_DATA_DIR) -> list[DataQualityIssu
     issues.extend(_check_commitment_math(raw_data_dir))
     issues.extend(_check_capital_call_dates_and_amounts(raw_data_dir))
     issues.extend(_check_facility_amounts(raw_data_dir))
+    issues.extend(_check_referential_integrity(raw_data_dir))
     return issues
