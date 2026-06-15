@@ -274,3 +274,21 @@ fund-finance list-credit-memos
 ```
 
 Displays generated credit memo PDF outputs, including filename, path, file size, and modified timestamp.
+
+---
+
+## 13. Portfolio Summary Export Command
+
+### Export Portfolio Summary CSV
+
+```bash
+fund-finance export-portfolio-summary
+```
+
+Exports a facility-level portfolio monitoring summary to:
+
+```text
+data/outputs/portfolio_summary.csv
+```
+
+The export includes facility type, commitment amount, outstanding amount, latest credit score, latest recommendation, open monitoring events, and escalation events.
