@@ -88,3 +88,24 @@ This creates a stressed LTV breach.
 Stress testing adds downside-case discipline to the project.
 
 The platform does not only calculate current availability; it also evaluates whether collateral support remains adequate under adverse valuation movement.
+
+---
+
+## 8. Data-Driven Facility Stress Test
+
+Run a stress test directly from PostgreSQL facility and NAV data:
+
+```bash
+fund-finance run-facility-stress --facility-id FAC002
+
+---
+
+## 8. Data-Driven Facility Stress Test
+
+Run a stress test directly from PostgreSQL facility and NAV data:
+
+```bash
+fund-finance run-facility-stress --facility-id FAC002
+```
+
+This command pulls the facility type, outstanding amount, maximum LTV, latest NAV date, and latest eligible NAV from the database, then applies downside NAV shocks.

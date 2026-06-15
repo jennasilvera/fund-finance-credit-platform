@@ -3,6 +3,7 @@ from pathlib import Path
 import typer
 from rich.console import Console
 from rich.table import Table
+from sqlalchemy import text
 
 from fund_finance.analytics.borrowing_base import (
     calculate_subscription_borrowing_base,
@@ -26,7 +27,7 @@ from fund_finance.analytics.risk_scoring import (
 )
 from fund_finance.analytics.stress_testing import FacilityStressInput, run_nav_ltv_stress
 from fund_finance.controls.data_quality import validate_raw_data
-from fund_finance.db.connection import list_tables, test_connection
+from fund_finance.db.connection import get_engine, list_tables, test_connection
 from fund_finance.db.load import count_loaded_rows, load_all_raw_data
 from fund_finance.reporting.credit_memo import generate_credit_approval_memo
 
@@ -537,6 +538,94 @@ def run_nav_stress(
         table.add_row(
             result.scenario_name,
             f"{result.nav_shock_pct:.0%}",
+            f"${result.stressed_eligible_nav_usd:,.0f}",
+            f"${result.outstanding_amount_usd:,.0f}",
+            f"{result.stressed_ltv_pct:.2f}%",
+            f"{result.max_ltv_pct:.2f}%",
+            f"{result.ltv_headroom_pct:.2f}%",
+            "YES" if result.breach_flag else "NO",
+        )
+
+    console.print(table)
+
+    if any(result.breach_flag for result in results):
+        console.print(
+            "[yellow]Stress breach detected under downside NAV scenario.[/yellow]"
+        )
+    else:
+        console.print("[green]No stress breaches detected.[/green]")
+
+
+@app.command("run-facility-stress")
+def run_facility_stress(
+    facility_id: str = typer.Option(..., help="Facility identifier."),
+) -> None:
+    """Run data-driven NAV/LTV stress testing using PostgreSQL facility data."""
+    engine = get_engine()
+
+    query = text(
+        """
+        SELECT
+            ft.facility_id,
+            ft.facility_type,
+            ft.outstanding_amount_usd,
+            ft.max_ltv_pct,
+            nh.net_nav_usd AS eligible_nav_usd,
+            nh.reporting_date
+        FROM facility_terms ft
+        JOIN nav_history nh
+            ON ft.fund_id = nh.fund_id
+        WHERE ft.facility_id = :facility_id
+        ORDER BY nh.reporting_date DESC
+        LIMIT 1;
+        """
+    )
+
+    with engine.connect() as connection:
+        row = connection.execute(query, {"facility_id": facility_id}).mappings().first()
+
+    if row is None:
+        console.print(f"[red]No facility data found for {facility_id}.[/red]")
+        raise typer.Exit(code=1)
+
+    if row["facility_type"] == "subscription":
+        console.print(
+            "[red]NAV stress testing is only applicable to NAV or hybrid facilities.[/red]"
+        )
+        raise typer.Exit(code=1)
+
+    if row["eligible_nav_usd"] is None or row["max_ltv_pct"] is None:
+        console.print(
+            f"[red]Facility {facility_id} is missing NAV or max LTV data.[/red]"
+        )
+        raise typer.Exit(code=1)
+
+    facility = FacilityStressInput(
+        facility_id=row["facility_id"],
+        facility_type=row["facility_type"],
+        eligible_nav_usd=float(row["eligible_nav_usd"]),
+        outstanding_amount_usd=float(row["outstanding_amount_usd"]),
+        max_ltv_pct=float(row["max_ltv_pct"]),
+    )
+
+    results = run_nav_ltv_stress(facility)
+
+    table = Table(title=f"Data-Driven NAV / LTV Stress Test: {facility_id}")
+    table.add_column("Facility Type", style="cyan")
+    table.add_column("NAV Date")
+    table.add_column("Scenario")
+    table.add_column("Stressed Eligible NAV", justify="right")
+    table.add_column("Outstanding", justify="right")
+    table.add_column("Stressed LTV", justify="right")
+    table.add_column("Max LTV", justify="right")
+    table.add_column("Headroom", justify="right")
+    table.add_column("Breach", justify="center")
+
+    for result in results:
+        table.add_row(
+            row["facility_type"],
+            str(row["reporting_date"]),
+            result.scenario_name,
             f"${result.stressed_eligible_nav_usd:,.0f}",
             f"${result.outstanding_amount_usd:,.0f}",
             f"{result.stressed_ltv_pct:.2f}%",
