@@ -62,6 +62,7 @@ The demo workflow:
 - [Credit Officer User Guide](docs/CREDIT_OFFICER_USER_GUIDE.md)
 - [Reporting Packages](docs/REPORTING_PACKAGES.md)
 - [Demo Walkthrough](docs/DEMO_WALKTHROUGH.md)
+- [Sample Output Guide](docs/SAMPLE_OUTPUT_GUIDE.md)
 - [System Architecture](docs/ARCHITECTURE.md)
 - [Operations Runbook](docs/OPERATIONS_RUNBOOK.md)
 
