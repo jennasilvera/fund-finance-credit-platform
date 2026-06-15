@@ -11,6 +11,28 @@ This project models how a bank fund finance team might support underwriting, cre
 
 ---
 
+## One-Command Demo
+
+After starting PostgreSQL, run the full demonstration workflow:
+
+```bash
+docker compose up -d postgres
+make demo
+```
+
+The demo workflow:
+
+- Generates simulated fund finance data
+- Validates raw CSV inputs
+- Loads data into PostgreSQL
+- Runs borrowing base analysis
+- Runs NAV / hybrid facility analysis
+- Runs covenant monitoring
+- Runs credit scoring
+- Generates a credit approval memo PDF
+
+---
+
 ## Documentation
 
 - [Underwriting Methodology](docs/UNDERWRITING_METHODOLOGY.md)

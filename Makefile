@@ -23,3 +23,7 @@ psql:
 
 status:
 	git status
+
+.PHONY: demo
+demo:
+	./scripts/demo_workflow.sh
