@@ -58,6 +58,7 @@ The demo workflow:
 - [Data Dictionary](docs/DATA_DICTIONARY.md)
 - [Data Quality Controls](docs/DATA_QUALITY_CONTROLS.md)
 - [Control Framework](docs/CONTROL_FRAMEWORK.md)
+- [Stress Testing](docs/STRESS_TESTING.md)
 - [Analyst User Guide](docs/ANALYST_USER_GUIDE.md)
 - [Credit Officer User Guide](docs/CREDIT_OFFICER_USER_GUIDE.md)
 - [Reporting Packages](docs/REPORTING_PACKAGES.md)
