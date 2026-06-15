@@ -1,0 +1,4 @@
+manager_id,manager_name,headquarters_country,total_aum_usd,strategy_focus,years_operating,prior_funds_count,realized_track_record_flag,sponsor_risk_rating
+MGR001,NorthBridge Capital Partners,US,18500000000,Middle-market buyout,19,4,True,Strong
+MGR002,Meridian Ventures,US,4200000000,Growth equity and venture capital,11,3,True,Acceptable
+MGR003,HarborStone Partners,UK,31000000000,Large-cap buyout,24,6,True,Strong

@@ -1,0 +1,4 @@
+event_id,fund_id,facility_id,event_date,event_type,severity,description,recommended_action,escalation_required_flag,resolved_flag
+EVT001,FND002,FAC002,2025-09-30,NAV decline,high,Meridian Ventures reported consecutive quarterly NAV declines driven by lower marks in climate tech and semiconductor holdings.,Request updated valuation package and test hybrid borrowing base availability.,True,False
+EVT002,FND002,FAC002,2025-07-30,Late capital call funding,medium,One excluded investor partially funded a follow-on capital call after the due date.,Confirm investor remains excluded from borrowing base and monitor future funding behavior.,False,False
+EVT003,FND003,FAC003,2025-12-31,Portfolio concentration watch,medium,Top portfolio company exposure remains elevated but below hard covenant threshold.,Continue quarterly monitoring and request exit pipeline update.,False,False

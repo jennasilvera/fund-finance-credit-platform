@@ -1,0 +1,7 @@
+covenant_id,facility_id,covenant_name,covenant_type,threshold_value,threshold_unit,test_frequency,breach_severity
+COV001,FAC001,Maximum Top Investor Concentration,concentration,25.0,percent,quarterly,medium
+COV002,FAC001,Minimum Borrowing Base Coverage,financial,1.1,x,quarterly,high
+COV003,FAC002,Maximum LTV,financial,30.0,percent,quarterly,high
+COV004,FAC002,Maximum Top Portfolio Company Concentration,concentration,25.0,percent,quarterly,medium
+COV005,FAC003,Maximum LTV,financial,30.0,percent,quarterly,high
+COV006,FAC003,Maximum Sector Concentration,concentration,35.0,percent,quarterly,medium

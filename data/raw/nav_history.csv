@@ -1,0 +1,25 @@
+nav_id,fund_id,reporting_date,gross_nav_usd,net_nav_usd,quarter_over_quarter_nav_change_pct,valuation_policy,valuation_source,audit_status
+NAV001,FND001,2024-03-31,1004500000.0,980000000,0.0,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV002,FND001,2024-06-30,1050625000.0,1025000000,4.5918,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV003,FND001,2024-09-30,1107000000.0,1080000000,5.3659,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV004,FND001,2024-12-31,1153125000.0,1125000000,4.1667,ASC 820 fair value framework,Manager quarterly report,audited
+NAV005,FND001,2025-03-31,1209500000.0,1180000000,4.8889,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV006,FND001,2025-06-30,1245375000.0,1215000000,2.9661,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV007,FND001,2025-09-30,1224875000.0,1195000000,-1.6461,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV008,FND001,2025-12-31,1260750000.0,1230000000,2.9289,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV009,FND002,2024-03-31,779000000.0,760000000,0.0,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV010,FND002,2024-06-30,753375000.0,735000000,-3.2895,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV011,FND002,2024-09-30,738000000.0,720000000,-2.0408,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV012,FND002,2024-12-31,727750000.0,710000000,-1.3889,ASC 820 fair value framework,Manager quarterly report,audited
+NAV013,FND002,2025-03-31,691875000.0,675000000,-4.9296,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV014,FND002,2025-06-30,666250000.0,650000000,-3.7037,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV015,FND002,2025-09-30,640625000.0,625000000,-3.8462,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV016,FND002,2025-12-31,656000000.0,640000000,2.4,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV017,FND003,2024-03-31,3997500000.0,3900000000,0.0,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV018,FND003,2024-06-30,4151250000.0,4050000000,3.8462,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV019,FND003,2024-09-30,4366500000.0,4260000000,5.1852,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV020,FND003,2024-12-31,4586875000.0,4475000000,5.0469,ASC 820 fair value framework,Manager quarterly report,audited
+NAV021,FND003,2025-03-31,4766250000.0,4650000000,3.9106,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV022,FND003,2025-06-30,4838000000.0,4720000000,1.5054,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV023,FND003,2025-09-30,4930250000.0,4810000000,1.9068,ASC 820 fair value framework,Manager quarterly report,unaudited
+NAV024,FND003,2025-12-31,5053250000.0,4930000000,2.4948,ASC 820 fair value framework,Manager quarterly report,unaudited

@@ -1,0 +1,13 @@
+investor_id,investor_name,investor_type,country,external_rating,internal_rating,included_in_borrowing_base_flag,investor_category,affiliate_group,liquidity_watch_flag,side_letter_restriction_flag
+INV001,North River State Retirement System,pension,US,AA,A+,True,rated_included,NRRS,False,False
+INV002,Atlantic University Endowment,endowment,US,AA-,A,True,rated_included,AUE,False,False
+INV003,BluePeak Insurance General Account,insurer,US,A,A-,True,rated_included,BPIG,False,False
+INV004,Cedar Grove Family Office,family_office,US,NR,BBB,True,designated,CGFO,False,True
+INV005,Westport Fund of Funds II,fund_of_funds,UK,NR,BBB+,True,non_rated_included,WFF,False,False
+INV006,Gulf Horizon Sovereign Investment Authority,sovereign_wealth,UAE,AA,A+,True,rated_included,GHSIA,False,False
+INV007,Lakeview Public Employees Pension Plan,pension,Canada,AA-,A,True,rated_included,LPEP,False,False
+INV008,Sierra Foundation,foundation,US,NR,BBB,True,non_rated_included,SF,False,False
+INV009,Orchard Wealth Partners,family_office,US,NR,BB+,False,excluded,OWP,True,True
+INV010,Crescent Asset Management,asset_manager,France,A,A-,True,rated_included,CAM,False,False
+INV011,Evergreen Healthcare Endowment,endowment,US,A,A-,True,rated_included,EHE,False,False
+INV012,Redwood Fund Investors,fund_of_funds,US,NR,BBB-,True,non_rated_included,RFI,False,False

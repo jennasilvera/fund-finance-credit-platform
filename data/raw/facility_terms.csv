@@ -1,0 +1,4 @@
+facility_id,fund_id,facility_type,lender_name,commitment_amount_usd,outstanding_amount_usd,maturity_date,pricing_bps,unused_fee_bps,advance_rate_rated_pct,advance_rate_non_rated_pct,advance_rate_designated_pct,nav_advance_rate_pct,max_ltv_pct,min_liquidity_usd,max_top_investor_concentration_pct,max_top5_investor_concentration_pct,max_top_portfolio_company_pct,max_sector_concentration_pct,reporting_frequency
+FAC001,FND001,subscription,Simulated Bank FSG,600000000,275000000,2027-06-30,225,40,90,80,60,0.0,0,25000000,25,65,0,0,quarterly
+FAC002,FND002,hybrid,Simulated Bank FSG,250000000,180000000,2026-12-31,325,65,85,70,50,25.0,30,15000000,20,60,25,40,quarterly
+FAC003,FND003,nav,Simulated Bank FSG,500000000,320000000,2028-03-31,375,75,0,0,0,22.5,30,30000000,0,0,20,35,quarterly

@@ -1,0 +1,25 @@
+company_id,fund_id,company_name,sector,geography,investment_date,cost_basis_usd,current_fair_value_usd,ownership_pct,revenue_growth_pct,ebitda_margin_pct,cash_runway_months,last_round_date,last_round_type,valuation_mark,non_performing_flag
+PC001,FND001,Atlas Components,Industrials,US,2022-03-31,118800000.0,165000000,35.0,12.0,18.0,24,,,up,False
+PC002,FND001,BrightPath Logistics,Transportation,US,2022-03-31,104400000.0,145000000,35.0,12.0,18.0,24,,,up,False
+PC003,FND001,Cobalt Software,Software,US,2022-03-31,93600000.0,130000000,35.0,12.0,18.0,24,,,up,False
+PC004,FND001,Keystone Packaging,Consumer,US,2022-03-31,82800000.0,115000000,35.0,12.0,18.0,24,,,up,False
+PC005,FND001,Ridge Medical Devices,Healthcare,US,2022-03-31,126000000.0,175000000,35.0,12.0,18.0,24,,,up,False
+PC006,FND001,Summit Data Systems,Technology,US,2022-03-31,75600000.0,105000000,35.0,12.0,18.0,24,,,up,False
+PC007,FND001,Pioneer Controls,Industrials,US,2022-03-31,68400000.0,95000000,35.0,12.0,18.0,24,,,up,False
+PC008,FND001,Northstar Clinics,Healthcare,US,2022-03-31,90000000.0,125000000,35.0,12.0,18.0,24,,,up,False
+PC009,FND002,NovaAI Systems,Software,US,2022-03-31,129600000.0,180000000,12.5,38.0,-12.0,10,2025-06-30,Series C,up,False
+PC010,FND002,Helio Battery Labs,Climate Tech,US,2022-03-31,86400000.0,120000000,12.5,38.0,-12.0,10,2025-06-30,Series C,down,False
+PC011,FND002,PulsePay Networks,Fintech,US,2022-03-31,68400000.0,95000000,12.5,38.0,-12.0,10,2025-06-30,Series C,up,False
+PC012,FND002,GeneWorks Bio,Healthcare,US,2022-03-31,61200000.0,85000000,12.5,38.0,-12.0,10,2025-06-30,Series C,up,False
+PC013,FND002,Orbit Robotics,Robotics,US,2022-03-31,50400000.0,70000000,12.5,38.0,-12.0,10,2025-06-30,Series C,up,False
+PC014,FND002,CloudForge Security,Cybersecurity,US,2022-03-31,46800000.0,65000000,12.5,38.0,-12.0,10,2025-06-30,Series C,up,False
+PC015,FND002,Vector Commerce,Software,US,2022-03-31,39600000.0,55000000,12.5,38.0,-12.0,10,2025-06-30,Series C,up,False
+PC016,FND002,Lumina Chips,Semiconductors,US,2022-03-31,28800000.0,40000000,12.5,38.0,-12.0,10,2025-06-30,Series C,down,True
+PC017,FND003,Crown Industrial Services,Industrials,US,2020-03-31,518400000.0,720000000,35.0,12.0,18.0,24,,,up,False
+PC018,FND003,Mariner Health Group,Healthcare,US,2020-03-31,460800000.0,640000000,35.0,12.0,18.0,24,,,up,False
+PC019,FND003,Apex Payment Systems,Fintech,US,2020-03-31,417600000.0,580000000,35.0,12.0,18.0,24,,,up,False
+PC020,FND003,Stonegate Foods,Consumer,US,2020-03-31,302400000.0,420000000,35.0,12.0,18.0,24,,,up,False
+PC021,FND003,Helix Infrastructure,Infrastructure,US,2020-03-31,496800000.0,690000000,35.0,12.0,18.0,24,,,up,False
+PC022,FND003,Bayside Software,Software,US,2020-03-31,381600000.0,530000000,35.0,12.0,18.0,24,,,up,False
+PC023,FND003,Redwood Manufacturing,Industrials,US,2020-03-31,342000000.0,475000000,35.0,12.0,18.0,24,,,up,False
+PC024,FND003,Clearwater Labs,Healthcare,US,2020-03-31,273600000.0,380000000,35.0,12.0,18.0,24,,,up,False

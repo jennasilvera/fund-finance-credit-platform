@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment files
+.env
+.env.local
+
+# Data outputs
+data/processed/
+data/outputs/
+*.pdf
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

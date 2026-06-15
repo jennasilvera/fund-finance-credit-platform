@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: fund_finance_postgres
+    environment:
+      POSTGRES_USER: fundfinance
+      POSTGRES_PASSWORD: fundfinance
+      POSTGRES_DB: fundfinance
+    ports:
+      - "5432:5432"
+    volumes:
+      - fund_finance_pgdata:/var/lib/postgresql/data
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fundfinance -d fundfinance"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  fund_finance_pgdata:
